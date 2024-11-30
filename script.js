@@ -40,7 +40,7 @@ btn.addEventListener('click', function() {
     Promise.all(imagePromises)
         .then(urls => {
             urls.forEach(url => {
-				console.log(url);
+				
                 let imageElement = document.createElement('img');
                 imageElement.src = url;
                 output.appendChild(imageElement);
