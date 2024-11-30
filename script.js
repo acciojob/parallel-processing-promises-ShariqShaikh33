@@ -39,9 +39,9 @@ function loadimg(images){
 btn.addEventListener('click',function(){
 	let imagepromises = loadimg(images);
 	Promise.all(imagepromises)
-	.then(url => {
+	.then(urls => {
 		
-		blob.forEach((url) => {
+		urls.forEach((url) => {
 			let imageElement = document.createElement('img');
 			imageElement.src = url;
 			output.appendChild(imageElement);
@@ -50,5 +50,4 @@ btn.addEventListener('click',function(){
 		console.error(err);
 	});
 });
-
 
