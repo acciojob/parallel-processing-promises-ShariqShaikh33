@@ -13,7 +13,7 @@ function downloadImage(url){
 		fetch(url)
 			.then(response=>{
 				if(!response.ok){
-					throw new Error("HTTP error! status: ${response.status}");
+					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				
 				return response;
@@ -22,7 +22,7 @@ function downloadImage(url){
 				resolve(blob.url);
 			})
 			.catch(e=>{
-				reject(new Error("Image not loaded properly! ${url}"))
+				reject(new Error(`Image not loaded properly! ${url}`))
 			})
 	})
 }
