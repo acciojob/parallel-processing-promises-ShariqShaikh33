@@ -8,45 +8,43 @@ const images = [
   { url: "https://picsum.photos/id/239/200/300" },
 ];
 
-function downloadimg(url){
-    return new Promise((resolve, reject) => {
-        fetch(url)
-            .then(response => {
-                if (!response.ok){
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.blob();
-            })
-            .then(blob => {
-                let imgURL = URL.createObjectURL(blob);
-                resolve(imgURL);
-            })
-            .catch(e => {
-                reject(new Error(`Failed to load image's URL: ${url}`));
-            });
-    });
-}
-
-function loadimg(images){
-    let imagePromise = images.map(image => {
-        return downloadimg(image.url); // return the promise
-    });
-    return imagePromise; // return the array of promises
-}
-
-// Load images when button is clicked
-btn.addEventListener('click', function() {
-    let imagePromises = loadimg(images);
-    Promise.all(imagePromises)
-        .then(urls => {
-            urls.forEach(url => {
+function downloadImage(url){
+	return new Promise((resolve,reject)=> {
+		fetch(url)
+			.then(response=>{
+				if(!response.ok){
+					throw new Error("HTTP error! status: ${response.status}");
+				}
 				
-                let imageElement = document.createElement('img');
-                imageElement.src = url;
+				return response.blob();
+			})
+			.then(blob=>{
+				let imageURL = URL.createObjectURL(blob);
+				resolve(imageURL);
+			})
+			.catch(e=>{
+				reject(new Error("Image not loaded properly! ${url}"))
+			})
+	})
+}
+
+function loadimage(images){
+	let imagePromise = images.map(image=>{
+		return downloadImage(image.url);
+	});
+	return imagePromise;
+}
+
+btn.addEventListener('click', function(){
+	let imagePromise = loadimage(images);
+	Promise.all(imagePromise)
+		.then(res => {
+			res.forEach(url1=>{
+				let imageElement = document.createElement('img');
+                imageElement.src = url1;
                 output.appendChild(imageElement);
-            });
-        }).catch(err => {
-            console.error(err);
-        });
+			});
+			
+		});
 });
 
