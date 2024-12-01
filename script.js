@@ -19,8 +19,7 @@ function downloadImage(url){
 				return response;
 			})
 			.then(blob=>{
-				let imageURL = blob.url;
-				resolve(imageURL);
+				resolve(blob.url);
 			})
 			.catch(e=>{
 				reject(new Error("Image not loaded properly! ${url}"))
@@ -37,6 +36,7 @@ function loadimage(images){
 
 btn.addEventListener('click', function(){
 	let imagePromise = loadimage(images);
+	console.log(imagePromise);
 	Promise.all(imagePromise)
 		.then(res => {
 			res.forEach(url1=>{
