@@ -10,16 +10,17 @@ const images = [
 
 function downloadImage(url){
 	return new Promise((resolve,reject)=> {
+		let urlsave=url;
 		fetch(url)
 			.then(response=>{
 				if(!response.ok){
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 				
-				return response;
+				return url;
 			})
 			.then(blob=>{
-				resolve(blob.url);
+				resolve(blob);
 			})
 			.catch(e=>{
 				reject(new Error(`Image not loaded properly! ${url}`))
