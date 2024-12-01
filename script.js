@@ -16,10 +16,10 @@ function downloadImage(url){
 					throw new Error("HTTP error! status: ${response.status}");
 				}
 				
-				return response.blob();
+				return response;
 			})
 			.then(blob=>{
-				let imageURL = URL.createObjectURL(blob);
+				let imageURL = blob.url;
 				resolve(imageURL);
 			})
 			.catch(e=>{
